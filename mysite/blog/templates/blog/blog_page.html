@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+  <article>
+    <h1>{{ page.title }}</h1>
+    <p><small>{{ page.date }}</small></p>
+
+    {% if page.image %}
+      <img src="{{ page.image.file.url }}" alt="{{ page.image.title }}" style="max-width:600px;">
+    {% endif %}
+
+    <p>{{ page.intro }}</p>
+    <div>{{ page.body|richtext }}</div>
+
+    {% if page.tags.all %}
+      <p>
+        Tags:
+        {% for tag in page.tags.all %}
+          <span>{{ tag }}</span>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    {% endif %}
+  </article>
+{% endblock %}

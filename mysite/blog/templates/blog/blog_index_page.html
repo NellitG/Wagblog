@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ page.title }}</h1>
+  <div>{{ page.intro|richtext }}</div>
+
+  <h2>Latest posts</h2>
+  <ul>
+    {% for post in page.get_children.live %}
+      <li>
+        <a href="{{ post.url }}">{{ post.title }}</a>
+        <small>{{ post.specific.date }}</small>
+      </li>
+    {% empty %}
+      <li>No blog posts yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
